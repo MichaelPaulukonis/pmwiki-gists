@@ -20,13 +20,42 @@ Markup('gist', 'directives',
        '/\\(:gist(\\s+.*?)?:\\)/ei',
        "IncludeGist(PSS('$1'))");
 
-function IncludeGist($arg) {
+function IncludeGist($inp) {
 
     global $HTMLFooterFmt;
     $HTMLFooterFmt['gist'] = '<script>window.jQuery || document.write("<script src=\'//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\'>\x3C/script>")</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/gist-embed/1.3/gist-embed.min.js"></script>';
 
-    $gist = sprintf('<code data-gist-id="%s"></code>', trim($arg));
+    // TODO: parse-args
+
+    // if no named args, and is_numeric($arg)
+    // then assume args in the id
+    $inp = trim($inp);
+    $undefined = 'undefined';
+
+    $defaults = array('id'=>$undefined);
+
+    /*
+      TODO: implement the following
+      hide line numbers
+      remove footer
+      single file from gist with multiple files (note: must have sample gist with multiple files for testing and demo)
+      single lineNbr
+      range of lineNbrs
+      single lineNbr _and_ range of lineNbrs
+      list of lineNbrs (not nesc. contiguous)
+      no ID supplied at all..... ???
+
+     */
+
+    $args = array_merge($defaults, ParseArgs($inp));
+    $gistId = $args['id'];
+
+    if ($gistId == $undefined) {
+        $gistId = $inp;
+    }
+
+    $gist = sprintf('<code data-gist-id="%s"></code>', $gistId);
 
     return $gist;
 }
