@@ -17,7 +17,7 @@ by the Free Software Foundation; either version 2 of the License, or
 $RecipeInfo['pmwiki-gists']['Version'] = '2013-09-01';
 
 
-Markup('gist', 'directives',
+Markup('gist', 'inline',
        '/\\(:gist(\\s+.*?)?:\\)/ei',
        "IncludeGist(PSS('$1'))");
 
