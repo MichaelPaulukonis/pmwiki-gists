@@ -1,11 +1,12 @@
 <?php if (!defined('PmWiki')) exit();
 /*
-Embed gists into your pmwiki pages with the markup (:gist <id> :)
+Embed gists into your pmwiki pages with the markup (:gist is=<gist-id> :)
 
 Copyright 2013 Michael Paulukonis http://michaelpaulukonis.com
 
 Uses code from https://github.com/blairvanderhoof/gist-embed
-
+Actually, it's pretty much of a PmWiki markup-wrapper for gist-embed.
+All rights respective to gist-embed remain with the project authors.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published
@@ -22,8 +23,6 @@ Markup('gist', 'directives',
 
 function IncludeGist($inp) {
 
-    // if no named args, and is_numeric($arg)
-    // then assume args in the id
     $inp = trim($inp);
     $undefined = 'undefined';
 
@@ -37,10 +36,9 @@ function IncludeGist($inp) {
     $line = $args['line'];
     $hidefooter = $args['hide_footer'];
     $file = $args['file'];
-    $params = [];
+    $params = array();
 
-    sms('inp: ' . $inp);
-    sms('line: ' . $line);
+    //sms('inp: ' . $inp);
 
     if ($gistId == $undefined) {
         $gistId = $inp;
