@@ -1,6 +1,6 @@
 <?php if (!defined('PmWiki')) exit();
 /*
-Embed gists into your pmwiki pages with the markup (:gist is=<gist-id> :)
+Embed gists into your pmwiki pages with the markup (:gist id=<gist-id> :)
 
 Copyright 2013 Michael Paulukonis http://michaelpaulukonis.com
 
@@ -14,7 +14,7 @@ by the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 */
 
-$RecipeInfo['pmwiki-gists']['Version'] = '2013-09-01';
+$RecipeInfo['pmwiki-gists']['Version'] = '2013.09.03';
 
 
 Markup('gist', 'inline',
@@ -73,7 +73,7 @@ function IncludeGist($inp) {
 
     }
 
-    return $gist;
+    Keep($gist);
 }
 
 
