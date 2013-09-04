@@ -42,10 +42,23 @@ var push = function(target) {
     jake.cpR("./", target);
     };
 
+var getDateFormatted = function() {
+    var d = new Date();
+    var df = d.getFullYear() + '.' + pad((d.getMonth() + 1), 2) + '.' + pad(d.getDate(), 2);
+    return df;
+    };
+
+function pad(nbr, width, fill) {
+  fill = fill || '0';
+  nbr = nbr + '';
+  return nbr.length >= width ? n : new Array(width - nbr.length + 1).join(fill) + nbr;
+}
+
 
 desc('List the config file');
 task('dump', [], function() {
     console.log(config);
+    console.log('date: ' + getDateFormatted());
     });
 
 
@@ -55,5 +68,6 @@ task('zip', [], function() {
     var AdmZip = require('adm-zip');
     var zip = new AdmZip();
     zip.addLocalFile('pmwiki-gists.php');
-    zip.writeZip('pmwiki-gists.zip');
+    var versionName = 'pmwiki-gists.' + getDateFormatted() + '.zip';
+    zip.writeZip(versionName);
     });
